@@ -8,10 +8,12 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="app-container">
       {children}
+    
 
       <footer className="app-footer">
-        APP by neneth, elie et pauline !
+        app by neneth, pauline et elie
       </footer>
+
     </div>
   );
 };

@@ -4,7 +4,11 @@ type ButtonProps = {
 };
 
 const Button = ({ label, onClick }: ButtonProps) => {
-  return <button onClick={onClick}>{label}</button>;
+  return (
+    <button className="button" onClick={onClick}>
+      {label}
+    </button>
+  );
 };
 
 export default Button;
