@@ -9,7 +9,7 @@ const Home = () => {
   // Inialisation des états pour le pseudo
   const [pseudo, setPseudo] = useState("");
 
-  // Validation du formulaire
+  // Je vérifie si un pseudo est rentré
   const isFormValid = pseudo.trim() !== "";
 
   // Handlers pour les boutons
