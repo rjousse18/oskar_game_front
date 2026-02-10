@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import Button from "../components/Button";
 import PlayerList from "../components/PlayerList";
 import AnimatedTitle from "../components/AnimatedTitle";
+import HomeButton from "../components/HomeButton";
 import "../css/App.css";
 
 // Types pour les joueurs
@@ -49,7 +50,7 @@ const CreateGame = () => {
   }, [pseudo]);
 
 
-  // En attendant les sockets, on simule l'arrivée de joueurs toutes les 3 secondes
+  // En attendant les sockets, j'ai fait une fonction qui simule l'arrivée des joueurs jusqu'à 8 max
   useEffect(() => {
     if (players.length >= 8) return;
     const timer = setTimeout(() => {
@@ -67,6 +68,8 @@ const CreateGame = () => {
 
   return (
     <Layout>
+
+      <HomeButton />
       
       <AnimatedTitle text="OSCARZ" />
       

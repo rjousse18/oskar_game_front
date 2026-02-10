@@ -72,6 +72,23 @@ body {
   gap: 2px;
 }
 
+.home-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.home-button:hover {
+  transform: scale(1.1);
+}
+
+.home-button svg {
+  fill: white; 
+}
+
+
 
 /** LAYOUT **/
 
