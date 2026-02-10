@@ -82,9 +82,12 @@ body {
                  -1px 1px 0 #4f1507,
                   1px 1px 0 #4f1507;
   font-size: 60px;
+}
 
-  
-    
+.subtitle {
+  font-size: 20px;
+  color: white;
+  text-shadow: 1px 1px 0 #4f1507;
 }
 
 .app-container {
@@ -135,6 +138,23 @@ body {
   margin: 0 auto;
   font-size: 11px;
   opacity: 0.6;
+}
+
+
+/** CREATE GAME **/
+
+
+.game-container {
+  display: flex;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.main-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 

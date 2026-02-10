@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import Typewriter from 'typewriter-effect';
+import { useNavigate } from "react-router-dom";
 import useTypewriting from "../hooks/useTypewriting";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
-import "../App.css";
+import "../css/App.css";
 
 
 const Home = () => {
+
+  const navigate = useNavigate();
 
   // Inialisation du pseudo
   const placeholder = useTypewriting("Entrez votre pseudo");
@@ -19,6 +21,7 @@ const Home = () => {
   const handleCreateGame = () => {
     if (!isFormValid) return;
     console.log("CREATE", {pseudo: pseudo.trim()}); // en attendant les sockets
+    navigate("/create-game", { state: { pseudo: pseudo.trim() } });
   };
 
   const handleJoinGame = () => {

@@ -19,7 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
 
         <p className="footer-disclaimer">
-          Les développeurs de ce site ne sont pas responsables du contenu généré par les utilisateurs.
+          Les développeurs de ce site ne sont pas responsables du contenu généré par les utilisateurs. © 2026 OSCARZ
         </p>
 
       </footer>

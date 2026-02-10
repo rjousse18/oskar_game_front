@@ -1,0 +1,60 @@
+/** AFFICHAGE DE LA LISTE DES JOUEURS DANS LA SALLE D'ATTENTE **/
+
+.player-list {
+  display: grid;
+  grid-template-columns: 1fr; /* par défaut une seule colonne */
+  gap: 12px;
+  padding: 10px;
+  min-width: 150px;
+}
+
+.player-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-star {
+  width: 24px;
+  height: 24px;
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  background-color: #fdd835;
+}
+
+.player-name {
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 0 #4f1507;
+}
+
+
+/** RESPONSIVE **/
+
+/* Pour grands écrans : si on dépasse les 4 joueurs, 2 colonnes */
+@media (min-width: 1024px) {
+  .player-list {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .player-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .player-item {
+    margin: 4px;
+  }
+}
