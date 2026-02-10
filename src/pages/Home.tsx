@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useTypewriting from "../hooks/useTypewriting";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
+import AnimatedTitle from "../components/AnimatedTitle";
 import "../css/App.css";
 
 
@@ -33,7 +34,7 @@ const Home = () => {
   return (
 
     <Layout>
-      <h1 className="title">OSCARZ</h1>
+      <AnimatedTitle text="OSCARZ" />
 
 
       <form className="user-form" onSubmit={(e) => e.preventDefault()} >

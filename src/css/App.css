@@ -84,6 +84,31 @@ body {
   font-size: 60px;
 }
 
+.animated-title {
+  display: flex;
+  justify-content: center;
+  font-size: 60px;
+  color: white;
+  text-shadow: -1px -1px 0 #4f1507,
+               1px -1px 0 #4f1507,
+              -1px 1px 0 #4f1507,
+               1px 1px 0 #4f1507;
+}
+
+.letter {
+  display: inline-block;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 .subtitle {
   font-size: 20px;
   color: white;

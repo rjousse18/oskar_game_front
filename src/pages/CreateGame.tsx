@@ -4,6 +4,7 @@ import { useSocket } from "../hooks/useSocket";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
 import PlayerList from "../components/PlayerList";
+import AnimatedTitle from "../components/AnimatedTitle";
 import "../css/App.css";
 
 // Types pour les joueurs
@@ -35,18 +36,20 @@ const CreateGame = () => {
   useEffect(() => {
 
     // Si pas de socket ou de pseudo, redirection vers l'accueil
-    if (!socket || !pseudo) navigate("/");
+    if (!pseudo) navigate("/");
 
-    // Envoi de la requête de création de partie au serveur 
+    // En attendant les sockets, on simule la création de la partie avec un code aléatoire
     console.log("Création de la partie pour", pseudo);
     setGameCode("A1B2");
 
-    // Ajouter le créateur de la partie
+    // Ajouter le créateur de la partie avec une couleur aléatoire
     const color = colors[Math.floor(Math.random() * colors.length)];
     setPlayers([{ id: "1", pseudo, color }]);
+
   }, [pseudo]);
 
-    // On simule l'arrivée de nouveaux joueurs avec max 8 joueurs
+
+  // En attendant les sockets, on simule l'arrivée de joueurs toutes les 3 secondes
   useEffect(() => {
     if (players.length >= 8) return;
     const timer = setTimeout(() => {
@@ -64,7 +67,9 @@ const CreateGame = () => {
 
   return (
     <Layout>
-      <h1 className="title">OSCARZ</h1>
+      
+      <AnimatedTitle text="OSCARZ" />
+      
       <PlayerList players={players} />
 
       <div className="game-container">
@@ -73,7 +78,11 @@ const CreateGame = () => {
         </div>
       </div>
 
+      {players.length === 1 ? (
+        <p className="subtitle">En attente d'autres joueurs...</p>
+      ) : (
       <Button label="Démarrer la partie" onClick={() => console.log("Start game")} />
+      )}
     </Layout>
   );
 };
