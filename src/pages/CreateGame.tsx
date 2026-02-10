@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSocket } from "../hooks/useSocket";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
 import PlayerList from "../components/PlayerList";
@@ -7,9 +8,9 @@ import "../css/App.css";
 
 // Types pour les joueurs
 interface Player {
-  id: string;
-  pseudo: string;
-  color: string;
+    id: string;
+    pseudo: string;
+    color: string;
 }
 
 // Couleurs pour les joueurs
@@ -18,21 +19,25 @@ const colors = ["#f44336", "#e91e63", "#9c27b0", "#3f51b5", "#2196f3", "#4caf50"
 
 const CreateGame = () => {
 
-  // On récupère le pseudo
+  // Initialisation du socket
+  const socket = useSocket();
+
+  // On récupère le pseudo 
   const navigate = useNavigate();
   const pseudo = useLocation().state?.pseudo || "";
 
   // Inialisation du code de la partie
   const [gameCode, setGameCode] = useState<string>(""); 
-
+  
   // Inialisation de la liste des joueurs
   const [players, setPlayers] = useState<Player[]>([]);
 
   useEffect(() => {
-    // Si pas de pseudo, redirection vers l'accueil
-    if (!pseudo) navigate("/");
 
-    // Socket pour la création de la partie et la création d'un code unique
+    // Si pas de socket ou de pseudo, redirection vers l'accueil
+    if (!socket || !pseudo) navigate("/");
+
+    // Envoi de la requête de création de partie au serveur 
     console.log("Création de la partie pour", pseudo);
     setGameCode("A1B2");
 
