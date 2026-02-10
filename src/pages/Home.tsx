@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Typewriter from 'typewriter-effect';
+import useTypewriting from "../hooks/useTypewriting";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
 import "../App.css";
@@ -6,8 +8,9 @@ import "../App.css";
 
 const Home = () => {
 
-  // Inialisation des états pour le pseudo
-  const [pseudo, setPseudo] = useState("");
+  // Inialisation du pseudo
+  const placeholder = useTypewriting("Entrez votre pseudo");
+  const [pseudo, setPseudo] = useState<string>("");
 
   // Je vérifie si un pseudo est rentré
   const isFormValid = pseudo.trim() !== "";
@@ -23,8 +26,7 @@ const Home = () => {
     console.log("JOIN", {pseudo: pseudo.trim()}); // en attendant les sockets
   };
 
-  
-  
+
   return (
 
     <Layout>
@@ -38,9 +40,9 @@ const Home = () => {
           <input 
             className="pseudo-form"
             type="text" 
-            placeholder="PSEUDO"
+            placeholder= {placeholder}
             value={pseudo}
-            onChange={(e) => setPseudo(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPseudo(e.target.value)}
           />
 
           <Button label="CRÉER UNE PARTIE" onClick={handleCreateGame} />

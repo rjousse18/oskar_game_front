@@ -11,7 +11,17 @@ const Layout = ({ children }: LayoutProps) => {
     
 
       <footer className="app-footer">
-        app by neneth, pauline et elie
+        
+        <div className="footer-links">
+          <a href="#">Contact</a>
+          <a href="#">Conditions d'Utilisation</a>
+          <a href="#">Credits</a>
+        </div>
+
+        <p className="footer-disclaimer">
+          Les développeurs de ce site ne sont pas responsables du contenu généré par les utilisateurs.
+        </p>
+
       </footer>
 
     </div>

@@ -45,6 +45,15 @@ body {
   border: 3px dashed #4f1507;
   border-radius: 15px;
   cursor: pointer;
+  
+  /* ombre avec des layers pcq c'est plus joli lol */
+  box-shadow:
+      0 1px 1px hsl(0deg 0% 0% / 0.075),
+      0 2px 2px hsl(0deg 0% 0% / 0.075),
+      0 4px 4px hsl(0deg 0% 0% / 0.075),
+      0 8px 8px hsl(0deg 0% 0% / 0.075),
+      0 16px 16px hsl(0deg 0% 0% / 0.075)
+    ;
 }
 
 .button:hover {
@@ -72,7 +81,9 @@ body {
                   1px -1px 0 #4f1507,
                  -1px 1px 0 #4f1507,
                   1px 1px 0 #4f1507;
-  font-size: 50px;
+  font-size: 60px;
+
+  
     
 }
 
@@ -86,14 +97,44 @@ body {
   position: relative;
 }
 
+
+/** FOOTER **/
+
 .app-footer {
-  margin-top: 40px;
+  width: 100%;
+  padding: 20px 10px;
   font-size: 12px;
-  opacity: 0.7;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.7);
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  color: black;
+  bottom: 0;
+  left: 0;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.8;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.footer-disclaimer {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 11px;
+  opacity: 0.6;
 }
 
 
