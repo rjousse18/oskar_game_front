@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import useTypewriting from "../hooks/useTypewriting";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
 import AnimatedTitle from "../components/AnimatedTitle";
+import JoinGameModal from "../components/JoinGameModal";
 import "../css/App.css";
 
 
@@ -18,6 +19,9 @@ const Home = () => {
   // Je vérifie si un pseudo est rentré
   const isFormValid = pseudo.trim() !== "";
 
+  // Initialisation du modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   // Handlers pour les boutons
   const handleCreateGame = () => {
     if (!isFormValid) return;
@@ -25,9 +29,17 @@ const Home = () => {
     navigate("/create-game", { state: { pseudo: pseudo.trim() } });
   };
 
-  const handleJoinGame = () => {
+  // Ouvre le popup pour entrer le code de la partie à rejoindre
+  const handleJoinGameClick = () => {
     if (!isFormValid) return;
-    console.log("JOIN", {pseudo: pseudo.trim()}); // en attendant les sockets
+    setIsModalOpen(true); 
+  };
+
+  // Handler pour confirmer le code de la partie à rejoindre
+  const handleJoinGameConfirm = (code: string) => {
+    console.log("JOIN", { pseudo: pseudo.trim(), code});
+    setIsModalOpen(false);
+    // navigate("/join-game", { state: { pseudo, code: gameCode } }); // si nécessaire
   };
 
 
@@ -36,9 +48,7 @@ const Home = () => {
     <Layout>
       <AnimatedTitle text="OSCARZ" />
 
-
       <form className="user-form" onSubmit={(e) => e.preventDefault()} >
-
         <div className="button-group">
 
           <input 
@@ -50,11 +60,17 @@ const Home = () => {
           />
 
           <Button label="CRÉER UNE PARTIE" onClick={handleCreateGame} />
-          <Button label="REJOINDRE UNE PARTIE" onClick={handleJoinGame} />
+          <Button label="REJOINDRE UNE PARTIE" onClick={handleJoinGameClick} />
         
         </div>
-
       </form>
+
+      {/* Modal */}
+      <JoinGameModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={handleJoinGameConfirm}
+      />
 
       <footer className="app-footer">
         
