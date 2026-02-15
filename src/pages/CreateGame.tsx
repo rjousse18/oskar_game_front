@@ -12,7 +12,7 @@ import "../css/App.css";
 
 
 // Couleurs pour les joueurs
-const colors = ["#f44336", "#e91e63", "#9c27b0", "#3f51b5", "#2196f3", "#4caf50", "#ff9800"];
+const colors = ["#f44336", "#e91e63", "#9c27b0", "#3f51b5", "#2196f3", "#4caf50", "#ff9800", "#795548"];
 
 
 const CreateGame = () => {

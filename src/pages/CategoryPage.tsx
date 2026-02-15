@@ -42,11 +42,20 @@ const CategoryPage = () => {
   // Catégorie en dur 
   const categoryName = "MEILLEURE RÉALISATION";
 
+  // TEST EN LOCAL
+  const [localPlayers, setLocalPlayers] = useState<Player[]>(players);
+  const slots = Array.from(
+  { length: 8 },
+  (_, i) => localPlayers[i] ?? null
+);
+
   // Rempli jusqu'à 8 emplacements pour l'affichage des étoiles
+  /*
   const slots: (Player | null)[] = Array.from(
     { length: 8 },
     (_, i) => players[i] ?? null
   );
+  */
 
   // Je définis les states pour le vote:
 
@@ -66,6 +75,13 @@ const CategoryPage = () => {
   const handleConfirm = () => {
     if (!selected) return;
     setConfirmed(true);
+    setLocalPlayers((prev) =>
+    prev.map((p) =>
+      p.id === currentPlayerId
+        ? { ...p, hasVoted: true }
+        : p
+    )
+  );
     console.log("VOTE", { currentPlayerId, nomineeId: selected }); // en attendant le socket 
   };
 
@@ -79,6 +95,25 @@ const CategoryPage = () => {
       <div className="category-wrapper">
 
         <h1 className="category-title">{categoryName}</h1>
+
+        {/* ETOILES DES JOUEURS */}
+        <div className="players-row-cat">
+          {slots.map((player, i) => (
+            <div
+              key={player ? player.id : i}
+              className={`player-star-cat ${
+                player?.hasVoted ? "voted" : ""
+              } ${!player ? "empty" : ""}`}
+              style={{
+                "--player-color": player?.color || "#ffffff",
+              } as React.CSSProperties}
+            >
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2l2.9 6.1 6.7.6-5 4.3 1.5 6.5L12 16.9 5.9 19.5l1.5-6.5-5-4.3 6.7-.6L12 2z"/>
+              </svg>
+            </div>
+          ))}
+        </div>
 
 
         {/* NOMINÉS */}
