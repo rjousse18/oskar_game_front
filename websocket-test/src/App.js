@@ -23,12 +23,23 @@ function App() {
           console.log("CLIENT MESSAGE TOPIC :", body)
 
           setRoomId(body.id);
+          setMessages(body)
         })
         if (roomId) {
           console.log("ROOM ID :", roomId)
           stompClient.subscribe(`/topic/room/${roomId}`, (msg) => {
-            console.log("MESSAGE RECU", JSON.parse(msg.body));
-            setMessages(prev => [...prev, JSON.parse(msg.body)]);
+            const body = JSON.parse(msg.body);
+            
+            console.log("MESSAGE RECU", body);
+            if(body.inProgress === true) {
+              console.log(body.predictions);
+              console.log(body.step);
+              console.log(body.predictions[body.step]);
+              console.log(body.predictions[body.step].category_name);
+              setMessages(`LA GAME COMMENCE !!! PREDICTION EN COURS : ${body.predictions[body.step].category_name}`);
+            } else {
+              setMessages(body);
+            }
           });
         }
       }
@@ -56,6 +67,7 @@ function App() {
       <button onClick={() => send("JOIN_ROOM")}>Rejoindre</button>
       <button onClick={() => send("PLAYER_READY")}>Prêt</button>
       <button onClick={() => send("START_GAME")}>Start</button>
+      <button onClick={() => send("SEND_PREDICTION")}>Skip Prediction</button>
 
       <pre>{JSON.stringify(messages, null, 2)}</pre>
     </div>
