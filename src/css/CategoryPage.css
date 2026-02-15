@@ -1,0 +1,129 @@
+.category-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+
+/* TITRE */
+
+.category-title {
+    font-size: clamp(22px, 4vw, 40px);
+    color: white;
+    text-shadow:
+        -2px -2px 0 #4f1507,
+        2px -2px 0 #4f1507,
+        -2px  2px 0 #4f1507,
+        2px  2px 0 #4f1507;
+    margin-bottom: 30px;
+}
+
+
+/* JOUEURS */
+
+.players-row {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.player-dot {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: white;
+    opacity: 0.3;
+    transition: 0.2s ease;
+}
+
+.player-dot.voted {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.player-dot.empty {
+    opacity: 0.1;
+}
+
+
+/* NOMMES */
+
+.nominees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.nominee-card {
+    padding: 22px 18px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: white;
+    color: #4f1507;
+    border: 3px dashed #4f1507;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-shadow:
+        0 1px 1px hsl(0deg 0% 0% / 0.075),
+        0 2px 2px hsl(0deg 0% 0% / 0.075),
+        0 4px 4px hsl(0deg 0% 0% / 0.075);
+}
+
+.nominee-card:hover:not(:disabled) {
+    background-color: rgb(244, 255, 190);
+    transform: scale(1.03);
+}
+
+.nominee-card.selected {
+    background-color: #ffe032;
+    border-style: solid;
+    transform: scale(1.04);
+}
+
+.nominee-card.locked {
+    opacity: 0.7;
+    cursor: default;
+}
+
+
+.nominee-artist {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.nominee-film {
+    font-weight: 400;
+    font-size: 13px;
+    font-style: italic;
+    opacity: 0.75;
+}
+
+
+/* CONFIRMATION */
+
+.confirm-btn {
+    padding: 14px 28px;
+    font-size: 16px;
+    border-radius: 14px;
+    border: 3px solid transparent;
+    cursor: pointer;
+    background-color: rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.6);
+    transition: 0.2s ease;
+}
+
+.confirm-btn.active {
+    background-color: white;
+    color: #4f1507;
+    border-color: #4f1507;
+}
+
+.confirm-btn.active:hover {
+    background-color: #ffe032;
+    transform: scale(1.05);
+}

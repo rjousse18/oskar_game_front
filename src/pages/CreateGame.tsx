@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSocket } from "../hooks/useSocket";
+import type {Player} from "../types";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
 import PlayerList from "../components/PlayerList";
@@ -8,12 +9,7 @@ import AnimatedTitle from "../components/AnimatedTitle";
 import HomeButton from "../components/HomeButton";
 import "../css/App.css";
 
-// Types pour les joueurs
-interface Player {
-    id: string;
-    pseudo: string;
-    color: string;
-}
+
 
 // Couleurs pour les joueurs
 const colors = ["#f44336", "#e91e63", "#9c27b0", "#3f51b5", "#2196f3", "#4caf50", "#ff9800"];
@@ -84,7 +80,18 @@ const CreateGame = () => {
       {players.length === 1 ? (
         <p className="subtitle">En attente d'autres joueurs...</p>
       ) : (
-      <Button label="Démarrer la partie" onClick={() => console.log("Start game")} />
+      <Button
+        label="Démarrer la partie"
+        onClick={() =>
+          navigate("/category", {
+            state: {
+              players,
+              gameCode,
+              currentPlayerId: players[0]?.id, // le créateur
+            },
+          })
+        }
+      />
       )}
     </Layout>
   );
