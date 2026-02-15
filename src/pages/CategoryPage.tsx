@@ -6,31 +6,18 @@ import HomeButton from "../components/HomeButton";
 import "../css/CategoryPage.css";
 
 
-
-// Les petites étoiles pour indiquer quand les joueurs ont voté ou non
-// Un emplacement d'étoile est grisé jusqu'à ce qu'un joueur vote, puis coloré aux couleurs du joueur
-// A FAIRE
-
-const Etoile = ({ player, isEmpty }: { player?: Player; isEmpty?: boolean }) => {
-  const voted = player?.hasVoted ?? false;
-
-  return (
-    <div></div>
-  );
-};
-
-
 const CategoryPage = () => {
-  const navigate = useNavigate();
   const { state } = useLocation();
 
   // Récupération du state passé depuis la page pécédente
+  // players : id, pseudo, color, hasVoted
+  // currentPlayerId : id du joueur qui vote
   const {
-    players = [],
+    players = [], 
     currentPlayerId = "",
   } = (state as CategoryLocationState) ?? {};
 
-  // Nommés en dur
+  // Nommés (en dur pour l'instant)
   const nominees: Nominee[] = [
     { id: "n1", artist: "Chloé Zhao",           film: "Hamnet" },
     { id: "n2", artist:"Ryan Coogler" ,         film: "Sinners" },
@@ -39,10 +26,11 @@ const CategoryPage = () => {
     { id: "n5", artist: "Joachim Trier",        film: "Valeur sentimentale" },
   ];
 
-  // Catégorie en dur 
+  // Catégorie (en dur pour l'instant)
   const categoryName = "MEILLEURE RÉALISATION";
 
   // TEST EN LOCAL
+  // J'ai dupliqué la liste des joueurs en local pour pouvoir tester en attendant les sockets
   const [localPlayers, setLocalPlayers] = useState<Player[]>(players);
   const slots = Array.from(
   { length: 8 },
@@ -58,23 +46,24 @@ const CategoryPage = () => {
   */
 
   // Je définis les states pour le vote:
-
   // selected pour le choix du joueur
   const [selected, setSelected] = useState<string | null>(null);
 
   //confirmed pour bloquer le vote après confirmation
   const [confirmed, setConfirmed] = useState(false);
 
-  // Fonction de sélection d'un nominé
+  // Fonction de sélection d'un nominé (uniquement si pas encore confirmé)
   const handleSelect = (id: string) => {
     if (confirmed) return;
     setSelected(id);
   };
 
-  // Fonction de confirmation du vote
+  // Fonction de confirmation du vote 
   const handleConfirm = () => {
     if (!selected) return;
     setConfirmed(true);
+
+    // Simulation du vote, le joueur courant passe en "hasVoted: true"
     setLocalPlayers((prev) =>
     prev.map((p) =>
       p.id === currentPlayerId
@@ -96,7 +85,12 @@ const CategoryPage = () => {
 
         <h1 className="category-title">{categoryName}</h1>
 
-        {/* ETOILES DES JOUEURS */}
+        {/* 
+        ETOILES DES JOUEURS 
+        - Vide, opaque = Slot vide car il y'a moins de 8 joueurs
+        - Blanche = Slot pour un joueur présent qui n'a pas encore voté
+        - Colorée = Slot pour un joueur présent qui a voté
+        */}
         <div className="players-row-cat">
           {slots.map((player, i) => (
             <div
@@ -108,6 +102,7 @@ const CategoryPage = () => {
                 "--player-color": player?.color || "#ffffff",
               } as React.CSSProperties}
             >
+              {/* petit dessin des étoiles*/}
               <svg viewBox="0 0 24 24">
                 <path d="M12 2l2.9 6.1 6.7.6-5 4.3 1.5 6.5L12 16.9 5.9 19.5l1.5-6.5-5-4.3 6.7-.6L12 2z"/>
               </svg>
