@@ -126,9 +126,9 @@ body {
 }
 
 .subtitle {
-  font-size: 20px;
-  color: white;
-  text-shadow: 1px 1px 0 #4f1507;
+  font-size: 25px;
+  color: #4f1507; 
+  text-shadow: 0 1px 0 rgba(255,255,255,0.2);
 }
 
 .app-container {
