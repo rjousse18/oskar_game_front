@@ -1,20 +1,55 @@
-import { io, Socket } from "socket.io-client";
+import SockJS from "sockjs-client";
+import { Client } from "@stomp/stompjs";
 
-// On crée une variable pour stocker la connexion Socket.IO
-let socket: Socket | null = null;
+let stompClient: Client | null = null;
 
-// On crée une fonction pour se connecter au serveur Socket.IO
-export const connectSocket = () => {
-    if (!socket) {
-        socket = io("http://localhost:3000");
-    }
-    return socket;
+export const connectSocket = (
+  clientId: string,
+  onPrivateMessage: (data: any) => void,
+  onRoomMessage: (data: any) => void
+) => {
+  const socket = new SockJS("http://localhost:8080/ws");
+
+  stompClient = new Client({
+    webSocketFactory: () => socket,
+
+    onConnect: () => {
+      console.log("STOMP CONNECTED");
+
+      stompClient?.subscribe(`/topic/client/${clientId}`, (msg) => {
+        onPrivateMessage(JSON.parse(msg.body));
+      });
+    },
+
+    onStompError: (frame) => {
+      console.error("STOMP ERROR:", frame);
+    },
+  });
+
+  stompClient.activate();
 };
 
-// On crée une fonction pour se déconnecter du serveur Socket.IO
+export const subscribeToRoom = (
+  roomId: string,
+  callback: (data: any) => void
+) => {
+  stompClient?.subscribe(`/topic/room/${roomId}`, (msg) => {
+    callback(JSON.parse(msg.body));
+  });
+};
+
+export const sendMessage = (payload: any) => {
+  if (!stompClient || !stompClient.connected) {
+    console.warn("STOMP not connected yet");
+    return;
+  }
+
+  stompClient.publish({
+    destination: "/app/game",
+    body: JSON.stringify(payload),
+  });
+};
+
 export const disconnectSocket = () => {
-    if (socket) {
-        socket.disconnect();
-        socket = null;
-    }
+  stompClient?.deactivate();
 };
