@@ -1,16 +1,53 @@
-import { useEffect } from "react";
-import { connectSocket, disconnectSocket } from "../services/socket";
+import { useEffect, useState } from "react";
+import { connectSocket, getClient } from "../services/socket";
 
 export const useSocket = (
   clientId: string,
-  onPrivateMessage: (data: any) => void,
-  onRoomMessage: (data: any) => void
+  roomId: string | undefined,
+  onPrivateMessage: (msg: any) => void,
+  onRoomMessage: (msg: any) => void
 ) => {
+  const [connected, setConnected] = useState(false);
+
+  // Connexion initiale
   useEffect(() => {
-    connectSocket(clientId, onPrivateMessage, onRoomMessage);
+    connectSocket(() => {
+      setConnected(true);
+
+      const client = getClient();
+      if (!client) return;
+
+      client.subscribe(`/topic/client/${clientId}`, (message) => {
+        const body = JSON.parse(message.body);
+        onPrivateMessage(body);
+      });
+    });
 
     return () => {
-      disconnectSocket();
+      const client = getClient();
+      client?.deactivate();
     };
-  }, [clientId]);
+  }, []);
+
+  // Abonnement à la room quand roomId change
+  useEffect(() => {
+    if (!connected || !roomId) return;
+
+    const client = getClient();
+    if (!client) return;
+
+    const subscription = client.subscribe(
+      `/topic/room/${roomId}`,
+      (message) => {
+        const body = JSON.parse(message.body);
+        onRoomMessage(body);
+      }
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [connected, roomId]);
+
+  return connected;
 };

@@ -11,8 +11,15 @@ export interface Nominee {
   film: string;
 }
 
-export interface CategoryLocationState {
+export interface Category {
+  id: number;
+  name: string;
+}
+
+export interface GameState {
+  roomId: string;
   players: Player[];
-  gameCode: string;
-  currentPlayerId: string;
+  currentCategory?: Category;
+  inProgress: boolean;
+  hostId?: string;
 }

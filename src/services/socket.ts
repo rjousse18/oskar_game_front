@@ -1,55 +1,39 @@
-import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
 
-let stompClient: Client | null = null;
+let client: Client | null = null;
 
 export const connectSocket = (
-  clientId: string,
-  onPrivateMessage: (data: any) => void,
-  onRoomMessage: (data: any) => void
+  onConnect: () => void,
+  onError?: (error: any) => void
 ) => {
   const socket = new SockJS("http://localhost:8080/ws");
 
-  stompClient = new Client({
+  client = new Client({
     webSocketFactory: () => socket,
-
     onConnect: () => {
       console.log("STOMP CONNECTED");
-
-      stompClient?.subscribe(`/topic/client/${clientId}`, (msg) => {
-        onPrivateMessage(JSON.parse(msg.body));
-      });
+      onConnect();
     },
-
     onStompError: (frame) => {
-      console.error("STOMP ERROR:", frame);
+      console.error("STOMP error", frame);
+      if (onError) onError(frame);
     },
   });
 
-  stompClient.activate();
+  client.activate();
 };
 
-export const subscribeToRoom = (
-  roomId: string,
-  callback: (data: any) => void
-) => {
-  stompClient?.subscribe(`/topic/room/${roomId}`, (msg) => {
-    callback(JSON.parse(msg.body));
-  });
-};
+export const getClient = () => client;
 
-export const sendMessage = (payload: any) => {
-  if (!stompClient || !stompClient.connected) {
-    console.warn("STOMP not connected yet");
+export const sendMessage = (destination: string, body: any) => {
+  if (!client || !client.connected) {
+    console.log("STOMP not connected yet");
     return;
   }
 
-  stompClient.publish({
-    destination: "/app/game",
-    body: JSON.stringify(payload),
+  client.publish({
+    destination,
+    body: JSON.stringify(body),
   });
-};
-
-export const disconnectSocket = () => {
-  stompClient?.deactivate();
 };

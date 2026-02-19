@@ -37,9 +37,12 @@ const Home = () => {
 
   // Handler pour confirmer le code de la partie à rejoindre
   const handleJoinGameConfirm = (code: string) => {
-    console.log("JOIN", { pseudo: pseudo.trim(), code});
-    setIsModalOpen(false);
-    // navigate("/join-game", { state: { pseudo, code: gameCode } }); // si nécessaire
+    navigate("/create-game", {
+      state: {
+        pseudo: pseudo.trim(),
+        joinCode: code
+      }
+    });
   };
 
 
