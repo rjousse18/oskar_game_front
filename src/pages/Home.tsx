@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useTypewriting from "../hooks/useTypewriting";
 import Layout from "../components/Layout";
@@ -12,14 +12,14 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  // Inialisation du pseudo
+  // Effet de machine à écrire pour le placeholder du champ pseudo
   const placeholder = useTypewriting("Entrez votre pseudo");
   const [pseudo, setPseudo] = useState<string>("");
 
-  // Je vérifie si un pseudo est rentré
+  // Le formulaire n'est valide que si le pseudo n'est pas vide
   const isFormValid = pseudo.trim() !== "";
 
-  // Initialisation du modal
+  // Contrôle de l'affichage du modal de saisie du code de la partie
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Handlers pour les boutons
@@ -68,7 +68,7 @@ const Home = () => {
         </div>
       </form>
 
-      {/* Modal */}
+      {/* Modal de saisie du code de la partie à rejoindre */}
       <JoinGameModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -76,7 +76,8 @@ const Home = () => {
       />
 
       <footer className="app-footer">
-        
+
+        {/* PENSER A CREER LES PAGES !!! */}
         <div className="footer-links">
           <a href="#">Contact</a>
           <a href="#">Conditions d'Utilisation</a>

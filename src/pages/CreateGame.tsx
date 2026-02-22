@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { useSocket } from "../hooks/useSocket";
-import { sendMessage} from "../services/socket";
+import { sendMessage } from "../services/socket";
 import { useGame } from "../context/GameContext";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
@@ -11,24 +11,28 @@ import AnimatedTitle from "../components/AnimatedTitle";
 import HomeButton from "../components/HomeButton";
 
 const CreateGame = () => {
+
+  // ID unique et stable pour ce client, généré une seule fois
   const clientId = useMemo(() => uuidv4(), []);
   const navigate = useNavigate();
 
-  const locationState = useLocation().state as {
+  // Récupération du pseudo et du code de room depuis la navigation (Home.tsx)
+  const { pseudo, joinCode } = useLocation().state as {
     pseudo: string;
     joinCode?: string;
-  };
-
-  const pseudo = locationState?.pseudo || "";
-  const joinCode = locationState?.joinCode;
+  } ?? {};
 
   const { roomId, setRoomId, players, setPlayers } = useGame();
+
+  // Si joinCode est absent, c'est ce client qui crée la partie (il est l'hôte)
   const isHost = !joinCode;
 
   // Connexion WebSocket
   const connected = useSocket(
     clientId,
     joinCode || roomId,
+
+    // Message privé : reçu après CREATE_ROOM, contient le roomId attribué par le serveur
     (privateMsg) => {
       console.log("PRIVATE MESSAGE :", privateMsg);
 
@@ -42,6 +46,8 @@ const CreateGame = () => {
 
 
     },
+
+    // Message room : broadcast à tous les joueurs (ex: mise à jour de la liste des joueurs)
     (roomMsg) => {
       console.log("ROOM MESSAGE :", roomMsg);
 
@@ -51,17 +57,19 @@ const CreateGame = () => {
     }
   );
 
-  // Création room
+  // Une fois connecté, on envoie l'action de création ou de rejoindre la partie
   useEffect(() => {
 
     if (!connected) return;
 
+    // Redirection si le pseudo est manquant (accès direct à la route sans passer par Home)
     if (!pseudo) {
       navigate("/");
       return;
     }
 
     if (joinCode) {
+      // Le client souhaite rejoindre une room existante
       sendMessage("/app/game", {
         type: "JOIN_ROOM",
         roomId: joinCode,
@@ -69,6 +77,7 @@ const CreateGame = () => {
         clientId,
       });
     } else {
+      // Le client crée une nouvelle room
       sendMessage("/app/game", {
         type: "CREATE_ROOM",
         pseudo,
@@ -83,6 +92,7 @@ const CreateGame = () => {
       <AnimatedTitle text="OSCARZ" />
       <PlayerList players={players} />
 
+      {/* Affichage du code de room uniquement pour l'hôte, pour qu'il puisse le partager */}
       {isHost && (
         <>
           <p>Code : <strong>{roomId}</strong></p>
@@ -90,6 +100,7 @@ const CreateGame = () => {
       )}
 
       {isHost ? (
+        // L'hôte peut démarrer la partie uniquement si au moins un autre joueur a rejoint
         players.length > 1 ? (
           <Button
             label="Démarrer la partie"
@@ -105,6 +116,7 @@ const CreateGame = () => {
           <p className="subtitle">En attente d'autres joueurs...</p>
         )
       ) : (
+        // Les joueurs non-hôtes attendent que l'hôte lance la partie
         <p className="subtitle">En attente de l'hôte...</p>
       )}
     </Layout>

@@ -1,23 +1,29 @@
-import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { FC, useState } from "react";
+import { Dialog, DialogPanel } from "@headlessui/react";
+import { FC, useState, useCallback } from "react";
 import "../css/JoinGameModal.css";
 
-// Je définis les props du modal
+// Props du modal : contrôle de l'ouverture, fermeture, et confirmation avec le code saisi
 interface JoinGameModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onConfirm: (code: string) => void;
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: (code: string) => void;
 }
 
 
 const JoinGameModal: FC<JoinGameModalProps> = ({ isOpen, onClose, onConfirm }) => {
     const [gameCode, setGameCode] = useState("");
 
-    // Handler pour confirmer le code de la partie à rejoindre
-    const handleConfirm = () => {
-        if (!gameCode.trim()) return;
-        onConfirm(gameCode.trim());
+    // Valide et transmet le code, puis réinitialise le champ
+    const handleConfirm = useCallback(() => {
+        const trimmed = gameCode.trim();
+        if (!trimmed) return;
+        onConfirm(trimmed);
         setGameCode("");
+    }, [gameCode, onConfirm]);
+
+    // Permet de confirmer via la touche Entrée sur PC
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") handleConfirm();
     };
 
 
@@ -32,10 +38,12 @@ const JoinGameModal: FC<JoinGameModalProps> = ({ isOpen, onClose, onConfirm }) =
 
                     <input
                         type="text"
-                        placeholder="Code"
+                        placeholder="Code de la partie"
                         value={gameCode}
                         onChange={(e) => setGameCode(e.target.value)}
+                        onKeyDown={handleKeyDown}
                         className="join-modal-input"
+                        autoFocus
                     />
 
                     <button className="join-modal-button confirm" onClick={handleConfirm}>✓</button>

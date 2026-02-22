@@ -1,10 +1,9 @@
 import { createContext, useContext, useState } from "react";
 import type { GameState, Player, Category } from "../types";
 
-/* 
-  Type du context :
-  - On reprend GameState
-  - On ajoute les setters React
+/*
+  Ici on étend GameState avec les setters React correspondants!!!
+  C'est pour permettre la mise à jour de l'état global depuis n'importe quel composant enfant
 */
 interface GameContextType extends GameState {
     setRoomId: React.Dispatch<React.SetStateAction<string>>;
