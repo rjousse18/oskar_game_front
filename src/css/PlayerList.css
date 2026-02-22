@@ -38,6 +38,9 @@
   text-shadow: 1px 1px 0 #4f1507;
 }
 
+.player-ready {
+  color: green;
+}
 
 /** RESPONSIVE **/
 

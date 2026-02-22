@@ -1,5 +1,6 @@
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
+import { WebSocketMessage } from "../types";
 
 // Instance STOMP partagée à travers l'application
 let client: Client | null = null;
@@ -34,7 +35,7 @@ export const connectSocket = (
 export const getClient = () => client;
 
 // Publie un message JSON vers une destination STOMP (ne fait rien si le client n'est pas connecté)
-export const sendMessage = (destination: string, body: any) => {
+export const sendMessage = (destination: string, body: WebSocketMessage) => {
   if (!client?.connected) {
     console.warn("STOMP not connected yet");
     return;

@@ -1,11 +1,13 @@
 type ButtonProps = {
   label: string;
   onClick?: () => void;
+  isReady?: boolean;
+  disabled?: boolean;
 };
 
-const Button = ({ label, onClick }: ButtonProps) => {
+const Button = ({ label, onClick, isReady = false, disabled = false }: ButtonProps) => {
   return (
-    <button className="button" onClick={onClick}>
+    <button className={(isReady && "bgGreen") + " button"} onClick={onClick} disabled={disabled}>
       {label}
     </button>
   );

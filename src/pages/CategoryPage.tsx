@@ -11,11 +11,11 @@ const CategoryPage = () => {
   const handleConfirm = () => {
     if (!selected) return;
 
-    sendMessage("/app/game", {
-      type: "SEND_PREDICTION",
-      roomId,
-      nomineeId: selected,
-    });
+    // sendMessage("/app/game", {
+    //   type: "SEND_PREDICTION",
+    //   roomId,
+    //   nomineeId: selected,
+    // });
   };
 
   return (
@@ -25,7 +25,7 @@ const CategoryPage = () => {
       <div className="players-row-cat">
         {players.map((player) => (
           <div
-            key={player.id}
+            key={`player_id_category_page_${player.clientId}`}
             className={`player-star-cat ${player.hasVoted ? "voted" : ""}`}
             style={{ "--player-color": player.color } as React.CSSProperties}
           >

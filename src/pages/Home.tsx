@@ -50,7 +50,6 @@ const Home = () => {
 
     <Layout>
       <AnimatedTitle text="OSCARZ" />
-
       <form className="user-form" onSubmit={(e) => e.preventDefault()} >
         <div className="button-group">
 

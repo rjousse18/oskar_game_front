@@ -83,9 +83,20 @@ html {
     ;
 }
 
+.bgGreen {
+  background-color: green;
+}
+
+
 .button:hover {
   background-color: rgb(244, 255, 190);
   transform: scale(1.02);
+}
+
+.button:disabled {
+  background-color: #d43f3f;
+  color: white;
+  cursor: not-allowed;
 }
 
 .pseudo-form {
