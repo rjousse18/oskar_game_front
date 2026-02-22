@@ -1,8 +1,47 @@
 /** BASE **/
 
-* {
+:root {
+  --color-primary: #4f1507;       /* texte, bordures */
+  --color-gold: #ffe032;          /* fond actif, hover */
+  --color-gold-dark: #c4a538;     /* gradient */
+  --color-white: #ffffff;
+  --color-hover: rgb(244, 255, 190); /* hover boutons */
+  --radius-default: 15px;
+
+  /* Ombre multi-couche partagée par les boutons, modals, cartes */
+  --shadow-layered:
+    0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075),
+    0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075),
+    0 16px 16px hsl(0deg 0% 0% / 0.075);
+
+  /* Contour texte blanc*/
+  --text-shadow-outline:
+    -1px -1px 0 var(--color-primary),
+     1px -1px 0 var(--color-primary),
+    -1px  1px 0 var(--color-primary),
+     1px  1px 0 var(--color-primary);
+}
+
+
+*, *::before, *::after {
   box-sizing: border-box;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: transparent;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
 
 html {
   margin: 0;
@@ -18,17 +57,6 @@ html {
       #c4a538 100%
     );
 }
-
-
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Arial', sans-serif;
-  background: transparent;
-}
-
-
 
 
 /** BOUTONS **/
