@@ -6,6 +6,9 @@ import Button from "../components/Button";
 import AnimatedTitle from "../components/AnimatedTitle";
 import JoinGameModal from "../components/JoinGameModal";
 import "../css/App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import GithubIcon from "../components/icons/GithubIcon";
+import BookIcon from "../components/icons/BookIcon";
 
 
 const Home = () => {
@@ -63,9 +66,9 @@ const Home = () => {
           <Button label="CRÉER UNE PARTIE" onClick={handleCreateGame} />
           <Button label="REJOINDRE UNE PARTIE" onClick={handleJoinGameClick} />
         
-          <div className="button-group-info">
-            <button><img src="/github.png" alt="Github logo" style={{width: "50px"}}/></button> {/* Bouton pour github */}
-            <button>E</button> {/* Bouton pour explication du jeu */}
+          <div className="button-info-group">
+            <a href="#" className="button-info"><GithubIcon /></a> {/* Bouton pour github */}
+            <a href="#" className="button-info"><BookIcon /></a> {/* Bouton pour explication du jeu */}
           </div>
         </div>
       </form>

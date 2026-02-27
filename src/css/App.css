@@ -18,6 +18,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+svg {
+  width: 50px;
+  fill: var(--color-primary-dark);
+}
+
 
 html {
   margin: 0;
@@ -36,16 +41,17 @@ html {
 
 /** BOUTONS **/
 
-.button-group-info {
+.button-info-group {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
 }
 
-.button-group-info button {
+.button-info {
   width: 100%;
   margin: 5px;
   align-items: center;
+  text-align: center;
   background-color: var(--color-primary-light);
   color: var(--color-primary-dark-light);
   border: 3px dashed var(--color-primary-dark-light);
@@ -62,8 +68,8 @@ html {
     ;
 }
 
-.button-group-info button:hover {
-  background-color: var(--color-primary);
+.button-info:hover {
+  background-color: var(--color-primary-very-light);
   transform: scale(1.03);
 }
 
@@ -89,6 +95,7 @@ html {
     ;
 }
 
+
 .button:hover {
   background-color: var(--color-secondary-very-light);
   transform: scale(1.03);
@@ -99,11 +106,6 @@ html {
   color: var(--color-danger);
   cursor: not-allowed;
 }
-
-.pseudo-form {
-  background-color: #ffffff; /* A CONTINUER */
-}
-
 .button-group {
   max-width: 350px;
   display: flex;
@@ -126,6 +128,16 @@ html {
 .home-button svg {
   fill: white; 
 }
+
+/** Inputs **/
+
+.pseudo-form:focus {
+  outline: none;
+  border-width: 4px;
+}  
+.pseudo-form {
+  background-color: #ffffff; /* A CONTINUER */
+}  
 
 
 
