@@ -6,13 +6,10 @@ import Button from "../components/Button";
 import AnimatedTitle from "../components/AnimatedTitle";
 import JoinGameModal from "../components/JoinGameModal";
 import "../css/App.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GithubIcon from "../components/icons/GithubIcon";
 import BookIcon from "../components/icons/BookIcon";
 
-
 const Home = () => {
-
   const navigate = useNavigate();
 
   // Effet de machine à écrire pour le placeholder du champ pseudo
@@ -28,47 +25,53 @@ const Home = () => {
   // Handlers pour les boutons
   const handleCreateGame = () => {
     if (!isFormValid) return;
-    console.log("CREATE", {pseudo: pseudo.trim()}); // en attendant les sockets
-    navigate("/create-game", { state: { pseudo: pseudo.trim() } });
+    console.log("CREATE", { pseudo: pseudo.trim() }); // en attendant les sockets
+    navigate("/game", { state: { pseudo: pseudo.trim() } });
   };
 
   // Ouvre le popup pour entrer le code de la partie à rejoindre
   const handleJoinGameClick = () => {
     if (!isFormValid) return;
-    setIsModalOpen(true); 
+    setIsModalOpen(true);
   };
 
   // Handler pour confirmer le code de la partie à rejoindre
   const handleJoinGameConfirm = (code: string) => {
-    navigate("/create-game", {
+    navigate("/game", {
       state: {
         pseudo: pseudo.trim(),
-        joinCode: code
-      }
+        joinCode: code,
+      },
     });
   };
 
-
   return (
-
     <Layout>
       <AnimatedTitle text="OSCARZ" />
-      <form className="user-form" onSubmit={(e) => e.preventDefault()} >
+      <form className="user-form" onSubmit={(e) => e.preventDefault()}>
         <div className="button-group">
-          <input 
+          <input
             className="pseudo-form"
-            type="text" 
-            placeholder= {placeholder}
+            type="text"
+            placeholder={placeholder}
             value={pseudo}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPseudo(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPseudo(e.target.value)
+            }
           />
 
           <Button label="CRÉER UNE PARTIE" onClick={handleCreateGame} />
           <Button label="REJOINDRE UNE PARTIE" onClick={handleJoinGameClick} />
-        
+
           <div className="button-info-group">
-            <a href="#" className="button-info"><GithubIcon /></a> {/* Bouton pour github */}
-            <a href="#" className="button-info"><BookIcon /></a> {/* Bouton pour explication du jeu */}
+            <a href="#" className="button-info">
+              <GithubIcon />
+            </a>{" "}
+            {/* Bouton pour github */}
+            <a href="#" className="button-info">
+              <BookIcon />
+            </a>{" "}
+            {/* Bouton pour explication du jeu */}
           </div>
         </div>
       </form>
@@ -81,7 +84,6 @@ const Home = () => {
       />
 
       <footer className="app-footer">
-
         {/* PENSER A CREER LES PAGES !!! */}
         <div className="footer-links">
           <a href="#">Contact</a>
@@ -90,11 +92,10 @@ const Home = () => {
         </div>
 
         <p className="footer-disclaimer">
-          Les développeurs de ce site ne sont pas responsables du contenu généré par les utilisateurs. © 2026 OSCARZ
+          Les développeurs de ce site ne sont pas responsables du contenu généré
+          par les utilisateurs. © 2026 OSCARZ
         </p>
-
       </footer>
-
     </Layout>
   );
 };

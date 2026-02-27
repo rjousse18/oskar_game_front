@@ -12,7 +12,7 @@ import HomeButton from "../components/HomeButton";
 import { MessageType, MovieItem, Player, RoomMessage } from "../types";
 import { isPlayerUpToDatePrediction } from "../utils/PlayerUtils";
 
-const CreateGame = () => {
+const Game = () => {
   // ID unique et stable pour ce client, généré une seule fois
   const clientId = useMemo(() => uuidv4(), []);
   const [currentPlayer, setCurrentPlayer] = useState<Player>();
@@ -148,22 +148,40 @@ const CreateGame = () => {
       ) : (
         <>
           {/* Affichage du code de room uniquement pour l'hôte, pour qu'il puisse le partager */}
-          {isHost && (
+          {isHost && <></>}
+
+          {isHost ? (
             <>
               <p>
                 Code : <strong>{roomId}</strong>
               </p>
+              {/* L'hôte peut démarrer la partie uniquement si au moins un autre joueur a rejoint */}
+              {players.length > 1 ? (
+                <Button
+                  label="Démarrer la partie"
+                  onClick={() =>
+                    sendMessage("/app/game", {
+                      type: MessageType.START_GAME,
+                      roomId,
+                      clientId,
+                      pseudo,
+                      movieItem: null,
+                    })
+                  }
+                />
+              ) : (
+                <p className="subtitle">En attente d'autres joueurs...</p>
+              )}
             </>
-          )}
-
-          {isHost &&
-            // L'hôte peut démarrer la partie uniquement si au moins un autre joueur a rejoint
-            (players.length > 1 ? (
+          ) : (
+            <>
+              <p className="subtitle">En attente de l'hôte...</p>
               <Button
-                label="Démarrer la partie"
+                label="Se Mettre Prêt"
+                isReady={players.length > 0 && currentPlayer?.ready}
                 onClick={() =>
                   sendMessage("/app/game", {
-                    type: MessageType.START_GAME,
+                    type: MessageType.PLAYER_READY,
                     roomId,
                     clientId,
                     pseudo,
@@ -171,27 +189,12 @@ const CreateGame = () => {
                   })
                 }
               />
-            ) : (
-              <p className="subtitle">En attente d'autres joueurs...</p>
-            ))}
-          <p className="subtitle">En attente de l'hôte...</p>
-          <Button
-            label="Se Mettre Prêt"
-            isReady={players.length > 0 && currentPlayer?.ready}
-            onClick={() =>
-              sendMessage("/app/game", {
-                type: MessageType.PLAYER_READY,
-                roomId,
-                clientId,
-                pseudo,
-                movieItem: null,
-              })
-            }
-          />
+            </>
+          )}
         </>
       )}
     </Layout>
   );
 };
 
-export default CreateGame;
+export default Game;

@@ -1,15 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import CreateGame from "./pages/CreateGame";
-import CategoryPage from "./pages/CategoryPage";
+import Game from "./pages/Game";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/create-game" element={<CreateGame />} />
-        <Route path="/category" element={<CategoryPage />} />
+        <Route path="/game" element={<Game />} />
       </Routes>
     </BrowserRouter>
   );
