@@ -1,29 +1,5 @@
 /** BASE **/
-
-:root {
-  --color-primary: #4f1507;       /* texte, bordures */
-  --color-gold: #ffe032;          /* fond actif, hover */
-  --color-gold-dark: #c4a538;     /* gradient */
-  --color-white: #ffffff;
-  --color-hover: rgb(244, 255, 190); /* hover boutons */
-  --radius-default: 15px;
-
-  /* Ombre multi-couche partagée par les boutons, modals, cartes */
-  --shadow-layered:
-    0 1px 1px hsl(0deg 0% 0% / 0.075),
-    0 2px 2px hsl(0deg 0% 0% / 0.075),
-    0 4px 4px hsl(0deg 0% 0% / 0.075),
-    0 8px 8px hsl(0deg 0% 0% / 0.075),
-    0 16px 16px hsl(0deg 0% 0% / 0.075);
-
-  /* Contour texte blanc*/
-  --text-shadow-outline:
-    -1px -1px 0 var(--color-primary),
-     1px -1px 0 var(--color-primary),
-    -1px  1px 0 var(--color-primary),
-     1px  1px 0 var(--color-primary);
-}
-
+@import url('./variables.css');
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -52,24 +28,27 @@ html {
     url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="%23FFFFFF" d="M30.1,-47.7C40.2,-46.2,50.5,-40.7,55.9,-32C61.2,-23.4,61.7,-11.7,65.2,2C68.7,15.8,75.3,31.5,70,40.2C64.7,49,47.5,50.7,33.8,59.1C20.2,67.5,10.1,82.6,-0.7,83.9C-11.6,85.2,-23.2,72.7,-34.8,63.1C-46.5,53.6,-58.3,47,-65.1,37C-71.9,27,-73.8,13.5,-73.4,0.2C-73,-13,-70.4,-26.1,-64.8,-38.2C-59.2,-50.3,-50.6,-61.6,-39.3,-62.4C-28,-63.2,-14,-53.4,-2,-49.9C10,-46.4,19.9,-49.1,30.1,-47.7Z" transform="translate(100 100)" /></svg>')
       no-repeat right -30vw bottom -30vw / 80vw,
     linear-gradient(
-      to right,
-      #ffe032 0%,
-      #c4a538 100%
+      to bottom,
+      var(--color-primary) 0%,
+      var(--color-primary-dark) 100%
     );
 }
 
-
 /** BOUTONS **/
 
-.button, .pseudo-form{
-  padding: 25px 20px;
-  margin: 10px;
-  font-size: 20px;
-  font-weight: 600;
+.button-group-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.button-group-info button {
+  width: 100%;
+  margin: 5px;
   align-items: center;
-  background-color: white;
-  color: #4f1507;
-  border: 3px dashed #4f1507;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark-light);
+  border: 3px dashed var(--color-primary-dark-light);
   border-radius: 15px;
   cursor: pointer;
   
@@ -83,19 +62,41 @@ html {
     ;
 }
 
-.bgGreen {
-  background-color: green;
+.button-group-info button:hover {
+  background-color: var(--color-primary);
+  transform: scale(1.03);
 }
 
+.button, .pseudo-form{
+  padding: 25px 20px;
+  margin: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  align-items: center;
+  background-color: var(--color-secondary-light);
+  color: var(--color-secondary);
+  border: 3px dashed var(--color-secondary);
+  border-radius: 15px;
+  cursor: pointer;
+  
+  /* ombre avec des layers pcq c'est plus joli lol */
+  box-shadow:
+      0 1px 1px hsl(0deg 0% 0% / 0.075),
+      0 2px 2px hsl(0deg 0% 0% / 0.075),
+      0 4px 4px hsl(0deg 0% 0% / 0.075),
+      0 8px 8px hsl(0deg 0% 0% / 0.075),
+      0 16px 16px hsl(0deg 0% 0% / 0.075)
+    ;
+}
 
 .button:hover {
-  background-color: rgb(244, 255, 190);
-  transform: scale(1.02);
+  background-color: var(--color-secondary-very-light);
+  transform: scale(1.03);
 }
 
 .button:disabled {
-  background-color: #d43f3f;
-  color: white;
+  background-color: var(--color-danger-light);
+  color: var(--color-danger);
   cursor: not-allowed;
 }
 
@@ -132,10 +133,10 @@ html {
 
 .title {
   color: white;
-  text-shadow: -1px -1px 0 #4f1507,
-                  1px -1px 0 #4f1507,
-                 -1px 1px 0 #4f1507,
-                  1px 1px 0 #4f1507;
+  text-shadow: -1px -1px 0 var(--color-secondary),
+                  1px -1px 0 var(--color-secondary),
+                 -1px 1px 0 var(--color-secondary),
+                  1px 1px 0 var(--color-secondary);
   font-size: 60px;
 }
 
@@ -144,10 +145,10 @@ html {
   justify-content: center;
   font-size: 60px;
   color: white;
-  text-shadow: -1px -1px 0 #4f1507,
-               1px -1px 0 #4f1507,
-              -1px 1px 0 #4f1507,
-               1px 1px 0 #4f1507;
+  text-shadow: -1px -1px 0 var(--color-secondary),
+               1px -1px 0 var(--color-secondary),
+              -1px 1px 0 var(--color-secondary),
+               1px 1px 0 var(--color-secondary);
 }
 
 .letter {
@@ -166,7 +167,7 @@ html {
 
 .subtitle {
   font-size: 25px;
-  color: #4f1507; 
+  color: var(--color-secondary-dark); 
   text-shadow: 0 1px 0 rgba(255,255,255,0.2);
 }
 
@@ -188,7 +189,7 @@ html {
   padding: 20px 10px;
   font-size: 12px;
   text-align: center;
-  color: rgba(0, 0, 0, 0.7);
+  color: var(--color-secondary-dark);
   position: absolute;
   bottom: 0;
   left: 0;
@@ -288,7 +289,7 @@ html {
     text-align: center;
     padding: 15px 10px;
     position: static;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--color-secondary-dark);
   } 
 }
 

@@ -1,6 +1,5 @@
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { FC, useState, useCallback } from "react";
-import "../css/JoinGameModal.css";
 
 // Props du modal : contrôle de l'ouverture, fermeture, et confirmation avec le code saisi
 interface JoinGameModalProps {

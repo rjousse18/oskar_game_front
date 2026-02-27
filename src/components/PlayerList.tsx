@@ -1,5 +1,4 @@
 import React from "react";
-import "../css/PlayerList.css";
 import { Player } from "../types";
 import { isPlayerUpToDatePrediction } from "../utils/PlayerUtils";
 

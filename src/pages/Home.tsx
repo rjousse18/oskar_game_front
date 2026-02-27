@@ -52,7 +52,6 @@ const Home = () => {
       <AnimatedTitle text="OSCARZ" />
       <form className="user-form" onSubmit={(e) => e.preventDefault()} >
         <div className="button-group">
-
           <input 
             className="pseudo-form"
             type="text" 
@@ -64,6 +63,10 @@ const Home = () => {
           <Button label="CRÉER UNE PARTIE" onClick={handleCreateGame} />
           <Button label="REJOINDRE UNE PARTIE" onClick={handleJoinGameClick} />
         
+          <div className="button-group-info">
+            <button><img src="/github.png" alt="Github logo" style={{width: "50px"}}/></button> {/* Bouton pour github */}
+            <button>E</button> {/* Bouton pour explication du jeu */}
+          </div>
         </div>
       </form>
 

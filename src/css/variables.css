@@ -1,0 +1,39 @@
+:root {
+  --color-primary: #F8DE65;          /* fond actif, hover */
+  --color-primary-light: #ffefa9;
+  --color-primary-dark: #B89D1D;     /* gradient */
+  --color-primary-dark-light: #e2bd05;
+  
+  --color-secondary: #155662;       /* texte, bordures */
+  --color-secodary-dark: #0b3945;    /* gradient */
+  --color-secondary-light: #CFF2F3;
+  --color-secondary-very-light: #EAFEFF; /* hover boutons */
+  --color-secondary-dark: #0b3945;    /* gradient */
+
+  --color-danger: #FF6B4A;
+  --color-danger-light: #FFB19A;
+
+  --color-success: #048365;
+  --color-success-light: #34e7be;
+
+  --color-white: #ffffff;
+  --color-hover: rgb(244, 255, 190); /* hover boutons */
+
+
+  --radius-default: 15px;
+
+  /* Ombre multi-couche partagée par les boutons, modals, cartes */
+  --shadow-layered:
+    0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075),
+    0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075),
+    0 16px 16px hsl(0deg 0% 0% / 0.075);
+
+  /* Contour texte blanc*/
+  --text-shadow-outline:
+    -1px -1px 0 var(--color-primary),
+     1px -1px 0 var(--color-primary),
+    -1px  1px 0 var(--color-primary),
+     1px  1px 0 var(--color-primary);
+}

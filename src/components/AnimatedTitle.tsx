@@ -1,6 +1,3 @@
-import React from "react";
-import "../css/App.css";
-
 interface Props {
     text: string;
 }
