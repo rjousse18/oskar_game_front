@@ -11,6 +11,8 @@ import AnimatedTitle from "../components/AnimatedTitle";
 import HomeButton from "../components/HomeButton";
 import { MessageType, MovieItem, Player, RoomMessage } from "../types";
 import { isPlayerUpToDatePrediction } from "../utils/PlayerUtils";
+import ClipboardButton from "../components/ClipboardButton";
+import PredictionButton from "../components/PredictionButton";
 
 const Game = () => {
   // ID unique et stable pour ce client, généré une seule fois
@@ -129,9 +131,8 @@ const Game = () => {
         <>
           <p>{predictions[step].category_name}</p>
           {predictions[step].movieItems.map((movieItem) => (
-            <Button
+            <PredictionButton
               key={`movie_item_list_${movieItem.movieItemId}`}
-              label={`${movieItem.nominee} ${returnMovieTitle(movieItem)}`}
               disabled={isPlayerUpToDatePrediction(currentPlayer, step)}
               onClick={() =>
                 sendMessage("/app/game", {
@@ -142,19 +143,19 @@ const Game = () => {
                   movieItem,
                 })
               }
-            />
+            >
+              {movieItem.nominee} {returnMovieTitle(movieItem)}
+            </PredictionButton>
           ))}
         </>
       ) : (
         <>
           {/* Affichage du code de room uniquement pour l'hôte, pour qu'il puisse le partager */}
-          {isHost && <></>}
 
           {isHost ? (
             <>
-              <p>
-                Code : <strong>{roomId}</strong>
-              </p>
+              <ClipboardButton label={`Code : ${roomId}`} textToCopy={roomId} />
+
               {/* L'hôte peut démarrer la partie uniquement si au moins un autre joueur a rejoint */}
               {players.length > 1 ? (
                 <Button

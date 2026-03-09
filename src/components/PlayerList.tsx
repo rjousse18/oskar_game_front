@@ -1,6 +1,7 @@
-import React from "react";
 import { Player } from "../types";
 import { isPlayerUpToDatePrediction } from "../utils/PlayerUtils";
+import StartIcon from "./icons/StarIcon";
+import "../css/PlayerList.css";
 
 interface Props {
   players: Player[];
@@ -14,12 +15,13 @@ const PlayerList = ({ players, isRoomInProgress, step }: Props) => {
   return (
     <div className="player-list">
       {players.map((player) => (
-        <div key={"player_id_list"+player.clientId} className="player-item">
-          <div
-            className="player-star"
-            style={{ backgroundColor: player.color }}
-          ></div>
-          <span className={`player-name ${isRoomInProgress ? (isPlayerUpToDatePrediction(player, step) && "player-ready") : (player.ready && "player-ready")}`}>{player.pseudo}</span>
+        <div key={"player_id_list" + player.clientId} className="player-item">
+          <StartIcon />
+          <span
+            className={`player-name ${isRoomInProgress ? isPlayerUpToDatePrediction(player, step) && "player-ready" : player.ready && "player-ready"}`}
+          >
+            {player.pseudo}
+          </span>
         </div>
       ))}
     </div>

@@ -95,6 +95,11 @@ html {
     ;
 }
 
+.prediction-button {
+  width: 30%;
+  /* TODO: responsive */
+}
+
 
 .button:hover {
   background-color: var(--color-secondary-very-light);
@@ -129,6 +134,7 @@ html {
   fill: white; 
 }
 
+
 /** Inputs **/
 
 .pseudo-form:focus {
@@ -138,7 +144,6 @@ html {
 .pseudo-form {
   background-color: #ffffff; /* A CONTINUER */
 }  
-
 
 
 /** LAYOUT **/
