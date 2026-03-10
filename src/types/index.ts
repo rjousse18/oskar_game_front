@@ -44,7 +44,6 @@ export interface MovieItem {
   movieItemId: number;
   nominee: string;
   movie: Movie;
-  players: Player[];
 }
 
 export enum MessageType {
