@@ -18,6 +18,7 @@ const Game = () => {
   // ID unique et stable pour ce client, généré une seule fois
   const clientId = useMemo(() => uuidv4(), []);
   const [currentPlayer, setCurrentPlayer] = useState<Player>();
+  const [gameEndedState, setGameEndedState] = useState<boolean>(false);
   const navigate = useNavigate();
   const {
     roomId,
@@ -101,6 +102,20 @@ const Game = () => {
     }
   }, [connected]);
 
+  useEffect(() => {
+    if (step === predictions.length - 1 && inProgress) {
+      // La partie est terminée, on set l'état de fin de partie.
+      setGameEndedState(true);
+    }
+  }, [step]);
+
+  useEffect(() => {
+    if (gameEndedState) {
+      // Redirection vers la page de résultats après un court délai pour laisser le temps d'afficher les résultats de la dernière catégorie
+      setTimeout(() => navigate("/results"), 3000);
+    }
+  }, [gameEndedState]);
+
   const returnMovieTitle = (movieItem: MovieItem) => {
     let finalReturn = "";
     if (
@@ -127,7 +142,9 @@ const Game = () => {
       <AnimatedTitle text="OSCARZ" />
       <PlayerList players={players} isRoomInProgress={inProgress} step={step} />
 
-      {inProgress ? (
+      {gameEndedState ? (
+        <>La partie est finie. Récupération des résultats en cours...</>
+      ) : inProgress ? (
         <>
           <p>{predictions[step].category_name}</p>
           {predictions[step].movieItems.map((movieItem) => (
