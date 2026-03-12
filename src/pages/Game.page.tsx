@@ -112,7 +112,7 @@ const Game = () => {
   useEffect(() => {
     if (gameEndedState) {
       // Redirection vers la page de résultats après un court délai pour laisser le temps d'afficher les résultats de la dernière catégorie
-      setTimeout(() => navigate("/results"), 3000);
+      setTimeout(() => navigate(`/results/${roomId}`), 3000);
     }
   }, [gameEndedState]);
 

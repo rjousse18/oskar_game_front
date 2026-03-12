@@ -47,18 +47,18 @@ export interface MovieItem {
 }
 
 export enum MessageType {
-    CREATE_ROOM,
-    JOIN_ROOM,
-    PLAYER_READY,
-    PLAYER_CANCEL_READY,
-    START_GAME,
-    SEND_PREDICTION
+  CREATE_ROOM,
+  JOIN_ROOM,
+  PLAYER_READY,
+  PLAYER_CANCEL_READY,
+  START_GAME,
+  SEND_PREDICTION,
 }
 
 export interface WebSocketMessage {
-    type: MessageType;
-    roomId: string | null;
-    pseudo: string;
-    clientId: string;
-    movieItem: MovieItem | null; // Prediction use made.
+  type: MessageType;
+  roomId: string | null;
+  pseudo: string;
+  clientId: string;
+  movieItem: MovieItem | null; // Prediction use made.
 }
