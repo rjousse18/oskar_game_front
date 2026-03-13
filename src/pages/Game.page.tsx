@@ -103,8 +103,7 @@ const Game = () => {
   }, [connected]);
 
   useEffect(() => {
-    console.log(step, predictions);
-    if (step === predictions.length - 1 && inProgress) {
+    if (!predictions[step] && inProgress) {
       // La partie est terminée, on set l'état de fin de partie.
       setGameEndedState(true);
     }
@@ -145,7 +144,7 @@ const Game = () => {
 
       {gameEndedState ? (
         <>La partie est finie. Récupération des résultats en cours...</>
-      ) : inProgress ? (
+      ) : inProgress && predictions[step] ? (
         <>
           <p>{predictions[step].category_name}</p>
           {predictions[step].movieItems.map((movieItem) => (
