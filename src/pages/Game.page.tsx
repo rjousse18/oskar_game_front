@@ -103,6 +103,7 @@ const Game = () => {
   }, [connected]);
 
   useEffect(() => {
+    console.log(step, predictions);
     if (step === predictions.length - 1 && inProgress) {
       // La partie est terminée, on set l'état de fin de partie.
       setGameEndedState(true);

@@ -1,0 +1,38 @@
+.result-group {
+  background-color: var(--color-secondary-very-light);
+  border-style: dashed;
+  border-color: var(--color-secondary);
+  border-width: 3px;
+  border-radius: 15px;
+  margin: 10px;
+  padding: 10px;
+  color: var(--color-secondary);
+  text-align: center;
+}
+
+.result-sub-group {
+  display: flex;
+  line-height: 1px;
+}
+
+.result-group > p {
+  margin: 5px;
+}
+
+.result-group .result-title {
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.result-pseudo {
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-secondary);
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  text-decoration: underline;
+}

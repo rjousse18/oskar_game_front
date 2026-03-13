@@ -97,7 +97,6 @@ html {
 
 .prediction-button {
   width: 30%;
-  /* TODO: responsive */
 }
 
 
@@ -257,6 +256,11 @@ html {
 
 
 /** RESPONSIVE **/
+@media (max-width: 767px) {
+  .prediction-button {
+    width: 90%;
+  }
+}
 
 @media (min-width: 768px) {
   .title {
@@ -269,6 +273,10 @@ html {
 
   body {
     background-size: 80vw;
+  }
+  
+  .prediction-button {
+    width: 50%;
   }
 }
 
