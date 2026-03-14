@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Results } from "../types/results.type";
+import CrownIcon from "./icons/CrownIcon";
 
 interface LeaderboardProps {
   results: Results;
@@ -15,9 +16,10 @@ const Leaderboard = ({ results }: LeaderboardProps) => {
     if (
       results.predictionResults.length === results.players[0].movieItems.length
     ) {
-      let allWinnerIds = new Set(
+      const tempPlayerScores = new Map<string, number>();
+      const allWinnerIds = new Set(
         results.predictionResults.map(
-          (prediction) => prediction.winnerMovierItemId,
+          (prediction) => prediction.winnerMovieItemId,
         ),
       );
 
@@ -31,37 +33,55 @@ const Leaderboard = ({ results }: LeaderboardProps) => {
         });
 
         // Je rajoute une entrée dans le playerScoresState pour le joueur avec son score
-        setPlayerScoresState((prev) => new Map(prev.set(player.pseudo, score)));
+        tempPlayerScores.set(player.pseudo, score);
       });
 
-      console.log(playerScoresState);
+      // Tri du playerScoresState par score décroissant + set du playerScoresState
+      setPlayerScoresState(
+        new Map([...tempPlayerScores.entries()].sort((a, b) => b[1] - a[1])),
+      );
 
       setIsLeaderboardState(true);
     }
   }, [results]);
 
   return isLeaderboardState ? (
-    <div className="leaderboard-container">
-      {playerScoresState.size > 0 ? (
-        <>
-          {Array.from(playerScoresState.entries()).map(
-            ([pseudo, score], index) => (
-              <div
-                className="leaderboard-entry"
-                key={"leaderboard_entry_" + index}
-              >
-                <p className="leaderboard-pseudo">{pseudo}</p>
-                <p className="leaderboard-score">
-                  {score} point{score > 1 ? "s" : ""}
-                </p>
-              </div>
-            ),
+    <>
+      <p className="leaderboard-title">Classement</p>
+      <div className="leaderboard-main">
+        <div className="leaderboard-container">
+          {playerScoresState.size > 0 ? (
+            <>
+              {Array.from(playerScoresState.entries()).map(
+                ([pseudo, score], index) => (
+                  <div
+                    className="leaderboard-entry"
+                    key={"leaderboard_entry_" + index}
+                  >
+                    <p
+                      className={
+                        "leaderboard-pseudo" + (index === 0 && " winner")
+                      }
+                    >
+                      {index === 0 && <CrownIcon />} {pseudo}
+                    </p>
+                    <p
+                      className={
+                        "leaderboard-score" + (index === 0 && " winner")
+                      }
+                    >
+                      {score} point{score > 1 ? "s" : ""}
+                    </p>
+                  </div>
+                ),
+              )}
+            </>
+          ) : (
+            <p>Chargement...</p>
           )}
-        </>
-      ) : (
-        <p>Chargement...</p>
-      )}
-    </div>
+        </div>
+      </div>
+    </>
   ) : (
     <>
       <p className="title">Les résultats de la partie :</p>

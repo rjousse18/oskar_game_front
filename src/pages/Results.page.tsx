@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ResultsService } from "../services/results.servce";
 import { Results } from "../types/results.type";
-import "../css/Results.css";
 import Leaderboard from "../components/Leaderboard";
 import HomeButton from "../components/HomeButton";
+import "../css/Results.css";
 
 const ResultsPage = () => {
   let { roomId } = useParams<{ roomId: string }>();

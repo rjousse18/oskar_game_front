@@ -36,3 +36,56 @@
   text-align: center;
   text-decoration: underline;
 }
+
+.leaderboard-title {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--color-secondary);
+  text-align: center;
+}
+
+.leaderboard-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 100px;
+}
+
+.leaderboard-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--color-secondary-very-light);
+  border-style: dashed;
+  border-color: var(--color-secondary);
+  border-width: 3px;
+  border-radius: 15px;
+  margin: 10px;
+  padding: 10px;
+  color: var(--color-secondary);
+}
+
+.leaderboard-pseudo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.winner {
+  font-weight: bold;
+}
+
+.leaderboard-entry {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-top-style: solid;
+  border-top-color: var(--color-secondary);
+  border-top-width: 1px;
+}
