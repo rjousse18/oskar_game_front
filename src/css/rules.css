@@ -1,0 +1,87 @@
+.rules-container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 20px;
+  color: #333;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rules-header {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #ffd700;
+}
+
+.rules-title {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.rules-subtitle {
+  font-size: 1.2em;
+  color: #666;
+}
+
+.rules-section {
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: white;
+  border-radius: 8px;
+  border-left: 4px solid #ffd700;
+}
+
+.rules-section-title {
+  font-size: 1.5em;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.rules-section-content {
+  line-height: 1.6;
+  color: #555;
+}
+
+.rules-list {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.rules-list li {
+  margin-bottom: 8px;
+}
+
+.rules-highlight {
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+.rules-example {
+  background-color: #f0f8ff;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  font-style: italic;
+  border-left: 3px solid #3498db;
+}
+
+.rules-note {
+  background-color: #fff3cd;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  font-size: 0.9em;
+}
+
+.rules-footer {
+  text-align: center;
+  margin-top: 30px;
+  font-style: italic;
+  color: #7f8c8d;
+}

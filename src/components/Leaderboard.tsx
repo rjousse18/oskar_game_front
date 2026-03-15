@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Results } from "../types/results.type";
 import CrownIcon from "./icons/CrownIcon";
+import ClipboardButton from "./ClipboardButton";
 
 interface LeaderboardProps {
   results: Results;
@@ -96,7 +97,13 @@ const Leaderboard = ({ results }: LeaderboardProps) => {
     </>
   ) : (
     <>
-      <p className="title">Les résultats de la partie :</p>
+      <p className="title">Les prédictions de la partie :</p>
+      <div style={{ textAlign: "center" }}>
+        <ClipboardButton
+          label="Copier le lien de la page"
+          textToCopy={`${window.location.origin}/results/${results.roomId}`}
+        />
+      </div>
       {results.players.map((player, index) => {
         return (
           <div className="result-group" key={"result_group_" + index}>
@@ -106,7 +113,7 @@ const Leaderboard = ({ results }: LeaderboardProps) => {
                 className="result-sub-group"
                 key={"result_sub_group_" + index}
               >
-                <p className="result-title">{movieItem.categoryName}:</p>
+                <p className="result-title">{movieItem.categoryName}: </p>
                 <p>{movieItem.nominee}</p>
               </div>
             ))}

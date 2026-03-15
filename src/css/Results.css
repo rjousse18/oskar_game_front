@@ -12,7 +12,12 @@
 
 .result-sub-group {
   display: flex;
-  line-height: 1px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  line-height: 1.5;
+  border-bottom-style: solid;
+  border-bottom-color: var(--color-secondary);
+  border-bottom-width: 0.5px;
 }
 
 .result-group > p {
@@ -88,4 +93,10 @@
   border-top-style: solid;
   border-top-color: var(--color-secondary);
   border-top-width: 1px;
+}
+
+@media (max-width: 767px) {
+  .leaderboard-container {
+    width: 90%;  
+  }
 }

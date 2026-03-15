@@ -5,9 +5,9 @@ import Layout from "../components/Layout";
 import Button from "../components/Button";
 import AnimatedTitle from "../components/AnimatedTitle";
 import JoinGameModal from "../components/JoinGameModal";
-import "../css/App.css";
 import GithubIcon from "../components/icons/GithubIcon";
 import BookIcon from "../components/icons/BookIcon";
+import "../css/App.css";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -68,7 +68,7 @@ const Home = () => {
               <GithubIcon />
             </a>{" "}
             {/* Bouton pour github */}
-            <a href="#" className="button-info">
+            <a href="/rules" className="button-info">
               <BookIcon />
             </a>{" "}
             {/* Bouton pour explication du jeu */}
@@ -86,9 +86,8 @@ const Home = () => {
       <footer className="app-footer">
         {/* PENSER A CREER LES PAGES !!! */}
         <div className="footer-links">
-          <a href="#">Contact</a>
-          <a href="#">Conditions d'Utilisation</a>
-          <a href="#">Credits</a>
+          <a href="/conditions">Conditions d'Utilisation</a>
+          <a href="/credits">Credits</a>
         </div>
 
         <p className="footer-disclaimer">
