@@ -98,8 +98,21 @@ html {
 
 .prediction-button {
   width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  line-height: 1.5;
+  padding: 15px;
+}
+.prediction-button p {
+  margin: 0;
 }
 
+.prediction-subtitle-button {
+  font-size: 14px;
+  color: var(--color-secondary);
+}
 
 .button:hover {
   background-color: var(--color-secondary-very-light);
@@ -109,8 +122,14 @@ html {
 .button:disabled {
   background-color: var(--color-danger-light);
   color: var(--color-danger);
+  border-color: var(--color-danger);
   cursor: not-allowed;
 }
+
+.button:disabled p {
+  color: var(--color-danger);
+}
+
 .button-group {
   max-width: 350px;
   display: flex;

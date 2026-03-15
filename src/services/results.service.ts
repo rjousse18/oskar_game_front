@@ -4,12 +4,11 @@ import { Results } from "../types/results.type";
 export const ResultsService = {
   async getResults(roomId: string): Promise<Results> {
     return axios
-      .get(`http://localhost:8080/api/results/${roomId}`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/api/results/${roomId}`)
       .then((response: { data: Results }) => {
         return response.data;
       })
       .catch((error) => {
-      
         console.error("Error fetching results", error);
         throw error;
       });

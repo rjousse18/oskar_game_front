@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ResultsService } from "../services/results.servce";
+import { ResultsService } from "../services/results.service";
 import { Results } from "../types/results.type";
 import Leaderboard from "../components/Leaderboard";
 import HomeButton from "../components/HomeButton";

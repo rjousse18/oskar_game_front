@@ -16,7 +16,13 @@ const PlayerList = ({ players, isRoomInProgress, step }: Props) => {
     <div className="player-list">
       {players.map((player) => (
         <div key={"player_id_list" + player.clientId} className="player-item">
-          <StartIcon />
+          <StartIcon
+            activated={
+              isRoomInProgress
+                ? isPlayerUpToDatePrediction(player, step)
+                : player.ready
+            }
+          />
           <span
             className={`player-name ${isRoomInProgress ? isPlayerUpToDatePrediction(player, step) && "player-ready" : player.ready && "player-ready"}`}
           >

@@ -1,6 +1,6 @@
 {
-  "name": "oskar_game_front",
-  "version": "0.1.0",
+  "name": "oskar_game",
+  "version": "0.0.10",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^2.2.9",

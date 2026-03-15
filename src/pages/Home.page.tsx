@@ -47,7 +47,7 @@ const Home = () => {
 
   return (
     <Layout>
-      <AnimatedTitle text="OSCARZ" />
+      <AnimatedTitle text="OSKARZ" />
       <form className="user-form" onSubmit={(e) => e.preventDefault()}>
         <div className="button-group">
           <input

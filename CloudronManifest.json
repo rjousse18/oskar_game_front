@@ -1,0 +1,29 @@
+{
+  "id": "com.nastream.oskarz_game",
+  "title": "Oskarz Game",
+  "author": "Rémi Joussé <remi.jousse@nastream.fr>",
+  "description": "Oskarz Game is a multiplayer game where players have to guess the winners of Oscar awards. The game is played in real-time and players can join a room to play with their friends.",
+  "tagline": "Guess the winners of Oscar awards in real-time with your friends!",
+  "version": "0.0.10",
+  "healthCheckPath": "/",
+  "httpPort": 80,
+  "addons": {
+    "localstorage": {}
+  },
+  "manifestVersion": 2,
+  "website": "https://oskarz.nastream.fr",
+  "contactEmail": "webmaster@nastream.fr",
+  "tags": [
+    "react",
+    "frontend",
+    "oscars",
+    "oskarz",
+    "game",
+    "websocket",
+    "multiplayer",
+    "real-time"
+  ],
+  "mediaLinks": [
+    "https://images.rapgenius.com/fd0175ef780e2feefb30055be9f2e022.520x343x1.jpg"
+  ]
+}

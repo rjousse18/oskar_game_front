@@ -1,7 +1,10 @@
-const StartIcon = () => {
+const StartIcon = ({ activated }: { activated: boolean }) => {
   return (
     <svg
       width={"50px"}
+      style={{
+        fill: activated ? "var(--color-success)" : "var(--color-secondary)",
+      }}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 640 640"
     >

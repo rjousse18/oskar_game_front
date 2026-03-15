@@ -13,9 +13,9 @@ let client: Client | null = null;
 
 export const connectSocket = (
   onConnect: () => void,
-  onError?: (error: any) => void
+  onError?: (error: any) => void,
 ) => {
-  const socket = new SockJS("http://localhost:8080/ws");
+  const socket = new SockJS(`${process.env.REACT_APP_BACKEND_URL}/ws`);
 
   client = new Client({
     webSocketFactory: () => socket,

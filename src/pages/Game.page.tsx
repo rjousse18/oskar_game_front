@@ -139,14 +139,14 @@ const Game = () => {
   return (
     <Layout>
       <HomeButton />
-      <AnimatedTitle text="OSCARZ" />
+      <AnimatedTitle text="OSKARZ" />
       <PlayerList players={players} isRoomInProgress={inProgress} step={step} />
 
       {gameEndedState ? (
         <>La partie est finie. Récupération des résultats en cours...</>
       ) : inProgress && predictions[step] ? (
         <>
-          <p>{predictions[step].category_name}</p>
+          <p className="subtitle">{predictions[step].category_name}</p>
           {predictions[step].movieItems.map((movieItem) => (
             <PredictionButton
               key={`movie_item_list_${movieItem.movieItemId}`}
@@ -161,7 +161,12 @@ const Game = () => {
                 })
               }
             >
-              {movieItem.nominee} {returnMovieTitle(movieItem)}
+              <p className="prediction-title-button">{movieItem.nominee}</p>
+              {returnMovieTitle(movieItem) !== "" && (
+                <p className="prediction-subtitle-button">
+                  {returnMovieTitle(movieItem)}
+                </p>
+              )}
             </PredictionButton>
           ))}
         </>
