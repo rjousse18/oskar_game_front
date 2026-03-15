@@ -13,6 +13,7 @@ import { MessageType, MovieItem, Player, RoomMessage } from "../types";
 import { isPlayerUpToDatePrediction } from "../utils/PlayerUtils";
 import ClipboardButton from "../components/ClipboardButton";
 import PredictionButton from "../components/PredictionButton";
+import { ResultsService } from "../services/results.service";
 
 const Game = () => {
   // ID unique et stable pour ce client, généré une seule fois
@@ -151,15 +152,29 @@ const Game = () => {
             <PredictionButton
               key={`movie_item_list_${movieItem.movieItemId}`}
               disabled={isPlayerUpToDatePrediction(currentPlayer, step)}
-              onClick={() =>
-                sendMessage("/app/game", {
+              onClick={() => {
+                if (roomId === "ROOM_ADMIN") {
+                  return ResultsService.setWinner(movieItem.movieItemId)
+                    .then((response) => {
+                      if (response) {
+                        console.log("Winner set successfully");
+                        setStep((prevStep) => prevStep + 1); // Passe à la catégorie suivante
+                      } else {
+                        console.error("Failed to set winner");
+                      }
+                    })
+                    .catch((error) => {
+                      console.error("Error setting winner", error);
+                    });
+                }
+                return sendMessage("/app/game", {
                   type: MessageType.SEND_PREDICTION,
                   clientId,
                   pseudo,
                   roomId,
                   movieItem,
-                })
-              }
+                });
+              }}
             >
               <p className="prediction-title-button">{movieItem.nominee}</p>
               {returnMovieTitle(movieItem) !== "" && (

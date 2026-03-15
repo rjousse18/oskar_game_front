@@ -6,17 +6,21 @@ interface LeaderboardProps {
   results: Results;
 }
 
+type PlayerScore = {
+  pseudo: string;
+  isWinner: boolean;
+  score: number;
+};
+
 const Leaderboard = ({ results }: LeaderboardProps) => {
   const [isLeaderboardState, setIsLeaderboardState] = useState(false);
-  const [playerScoresState, setPlayerScoresState] = useState<
-    Map<string, number>
-  >(new Map());
+  const [playerScoresState, setPlayerScoresState] = useState<PlayerScore[]>([]);
 
   useEffect(() => {
     if (
       results.predictionResults.length === results.players[0].movieItems.length
     ) {
-      const tempPlayerScores = new Map<string, number>();
+      let tempPlayerScores: PlayerScore[] = [];
       const allWinnerIds = new Set(
         results.predictionResults.map(
           (prediction) => prediction.winnerMovieItemId,
@@ -33,13 +37,23 @@ const Leaderboard = ({ results }: LeaderboardProps) => {
         });
 
         // Je rajoute une entrée dans le playerScoresState pour le joueur avec son score
-        tempPlayerScores.set(player.pseudo, score);
+        tempPlayerScores.push({
+          pseudo: player.pseudo,
+          score,
+          isWinner: false,
+        });
+      });
+
+      tempPlayerScores = tempPlayerScores.toSorted((a, b) => b.score - a.score);
+
+      tempPlayerScores.forEach((playerScore) => {
+        if (playerScore.score === tempPlayerScores[0].score) {
+          playerScore.isWinner = true;
+        }
       });
 
       // Tri du playerScoresState par score décroissant + set du playerScoresState
-      setPlayerScoresState(
-        new Map([...tempPlayerScores.entries()].sort((a, b) => b[1] - a[1])),
-      );
+      setPlayerScoresState(tempPlayerScores);
 
       setIsLeaderboardState(true);
     }
@@ -50,31 +64,29 @@ const Leaderboard = ({ results }: LeaderboardProps) => {
       <p className="leaderboard-title">Classement</p>
       <div className="leaderboard-main">
         <div className="leaderboard-container">
-          {playerScoresState.size > 0 ? (
+          {playerScoresState.length > 0 ? (
             <>
-              {Array.from(playerScoresState.entries()).map(
-                ([pseudo, score], index) => (
-                  <div
-                    className="leaderboard-entry"
-                    key={"leaderboard_entry_" + index}
+              {playerScoresState.map((playerScore, index) => (
+                <div
+                  className="leaderboard-entry"
+                  key={"leaderboard_entry_" + index}
+                >
+                  <p
+                    className={
+                      "leaderboard-pseudo" + (playerScore.isWinner && " winner")
+                    }
                   >
-                    <p
-                      className={
-                        "leaderboard-pseudo" + (index === 0 && " winner")
-                      }
-                    >
-                      {index === 0 && <CrownIcon />} {pseudo}
-                    </p>
-                    <p
-                      className={
-                        "leaderboard-score" + (index === 0 && " winner")
-                      }
-                    >
-                      {score} point{score > 1 ? "s" : ""}
-                    </p>
-                  </div>
-                ),
-              )}
+                    {playerScore.isWinner && <CrownIcon />} {playerScore.pseudo}
+                  </p>
+                  <p
+                    className={
+                      "leaderboard-score" + (playerScore.isWinner && " winner")
+                    }
+                  >
+                    {playerScore.score} point{playerScore.score > 1 ? "s" : ""}
+                  </p>
+                </div>
+              ))}
             </>
           ) : (
             <p>Chargement...</p>
